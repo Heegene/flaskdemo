@@ -21,8 +21,10 @@ def create_app():
     from . import models
 
     # blueprint 적용 => main_views에 라우팅 적용해주면됨
-    from .views import main_views
+    from .views import main_views, question_views
     # main_views에 있는 bp 객체 등록
     app.register_blueprint(main_views.bp)
+    # question_views로 분리해줬으니 이것도 blueprint 적용
+    app.register_blueprint(question_views.bp)
 
     return app
