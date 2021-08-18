@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>질문 상세 페이트</title>
+    <title>질문 상세 페이지 </title>
 </head>
 <body>
 
@@ -10,6 +10,36 @@
 <div>
     {{ question.content }}
 </div>
+
+<form action="{{ url_for('answer.create', question_id=question.id) }}" method="post">
+    <textarea name="content" id="content" rows="20"></textarea>
+    <button type="submit" value="등록">등록</button>
+</form>
+
+<div>
+    {% if question.answer_set != null %}
+    <h5> {{ question.answer_set|length }} 개의 답변이 있습니다. </h5>
+<!--    length 처럼 템플릿 필터 사용은 | 를 사용하고 뒤에 Length 이런 필터네임 붙여서 사용함 -->
+<!--    필터정보 https://jinja.palletsprojects.com/en/2.11.x/templates/#builtin-filters -->
+    <ul>
+        {% for answer in question.answer_set %}
+        <li>{{ answer.content }} / {{ answer.create_date.strftime('%Y-%m-%d %H:%M:%S') }} </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+
+<!--{% if question_list %}-->
+<!--    <ul>-->
+<!--        {% for question in question_list %}-->
+<!--&lt;!&ndash;           하드코딩부 제거 <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a> </li>&ndash;&gt;-->
+<!--                <li><a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a> </li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--{% else %}-->
+<!--    <p> 질문이 없습니다.</p>-->
+<!--{% endif %}-->
+
 
 </body>
 </html>
