@@ -1,21 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
 <head>
     <meta charset="UTF-8">
     <title>질문 리스트</title>
 </head>
 <body>
 
-{% if question_list %}
-    <ul>
-        {% for question in question_list %}
-<!--           하드코딩부 제거 <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a> </li>-->
-                <li><a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a> </li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p> 질문이 없습니다.</p>
-{% endif %}
+<div class="container my-3">
+    <table class="table">
+        <thead>
+            <tr class="thead-dark">
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성일시</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if question_list %}
+            {% for question in question_list %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>
+                        <a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a>
+                    </td>
+                    <td>{{ question.create_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="3">질문이 없습니다. </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<!--{% if question_list %}-->
+<!--    <ul>-->
+<!--        {% for question in question_list %}-->
+<!--&lt;!&ndash;           하드코딩부 제거 <li><a href="/detail/{{ question.id }}/">{{ question.subject }}</a> </li>&ndash;&gt;-->
+<!--                <li><a href="{{ url_for('question.detail', question_id=question.id) }}">{{ question.subject }}</a> </li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--{% else %}-->
+<!--    <p> 질문이 없습니다.</p>-->
+<!--{% endif %}-->
 
 </body>
 </html>

@@ -1,33 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- url_for는 정적파일 경로도 찾아줌 -->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+
 <head>
     <meta charset="UTF-8">
     <title>질문 상세 페이지 </title>
 </head>
 <body>
+<div class="container my-3">
+    <h2 class="border-bottom py-2"> {{ question.subject }} </h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">
+                {{ question.content }}
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="badge badge-light p-2">
+                    {{ question.create_date.strftime('%Y-%m-%d %H:%M:%S') }}
+                </div>
+            </div>
+        </div>
+    </div>
 
-<h1> {{ question.subject }} </h1>
-<div>
-    {{ question.content }}
+    <h5 class="border-bottom my-3 py-2">{{ question.answer_set | length }} 개의 답변이 있습니다. </h5>
+    {% for answer in question.answer_set %}
+        <div class="card my-3">
+            <div class="card-body">
+                <div class="card-text" style="white-space: pre-line;">{{ answer.content }}</div>
+                <div class="d-flex justify-content-end">
+                    <div class="badge badge-light p-2">
+                        {{ answer.create_date.strftime('%Y-%m-%d %H:%M:%S') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <form action="{{ url_for('answer.create', question_id=question.id) }}" method="post" class="my-3">
+        <div class="form-group">
+            <textarea name="content" id="content" class="form-control" rows="15"></textarea>
+        </div>
+        <button type="submit" value="등록" class="btn btn-primary">등록</button>
+    </form>
 </div>
 
-<form action="{{ url_for('answer.create', question_id=question.id) }}" method="post">
-    <textarea name="content" id="content" rows="20"></textarea>
-    <button type="submit" value="등록">등록</button>
-</form>
 
-<div>
-    {% if question.answer_set != null %}
-    <h5> {{ question.answer_set|length }} 개의 답변이 있습니다. </h5>
-<!--    length 처럼 템플릿 필터 사용은 | 를 사용하고 뒤에 Length 이런 필터네임 붙여서 사용함 -->
-<!--    필터정보 https://jinja.palletsprojects.com/en/2.11.x/templates/#builtin-filters -->
-    <ul>
-        {% for answer in question.answer_set %}
-        <li>{{ answer.content }} / {{ answer.create_date.strftime('%Y-%m-%d %H:%M:%S') }} </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-</div>
+
+<!--<form action="{{ url_for('answer.create', question_id=question.id) }}" method="post">-->
+<!--    <textarea name="content" id="content" rows="20"></textarea>-->
+<!--    <button type="submit" value="등록">등록</button>-->
+<!--</form>-->
+
+<!--<div>-->
+<!--    {% if question.answer_set != null %}-->
+<!--    <h5> {{ question.answer_set|length }} 개의 답변이 있습니다. </h5>-->
+<!--&lt;!&ndash;    length 처럼 템플릿 필터 사용은 | 를 사용하고 뒤에 Length 이런 필터네임 붙여서 사용함 &ndash;&gt;-->
+<!--&lt;!&ndash;    필터정보 https://jinja.palletsprojects.com/en/2.11.x/templates/#builtin-filters &ndash;&gt;-->
+<!--    <ul>-->
+<!--        {% for answer in question.answer_set %}-->
+<!--        <li>{{ answer.content }} / {{ answer.create_date.strftime('%Y-%m-%d %H:%M:%S') }} </li>-->
+<!--        {% endfor %}-->
+<!--    </ul>-->
+<!--    {% endif %}-->
+<!--</div>-->
 
 <!--{% if question_list %}-->
 <!--    <ul>-->
