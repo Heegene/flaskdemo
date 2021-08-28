@@ -16,6 +16,11 @@
 <div class="container my-3">
     <h2 class="border-bottom py-2"> {{ question.subject }} </h2>
     <div class="card my-3">
+        {% for field, errors in form.errors.items() %}
+            <div class="alert alert-danger" role="alert">
+                <strong>{{ form[field].label }}</strong>: {{ ','.join(errors) }}
+            </div>
+        {% endfor %}
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">
                 {{ question.content }}
@@ -43,10 +48,12 @@
     {% endfor %}
 
     <form action="{{ url_for('answer.create', question_id=question.id) }}" method="post" class="my-3">
+         {{ form.csrf_token }}
         <div class="form-group">
             <textarea name="content" id="content" class="form-control" rows="15"></textarea>
         </div>
         <button type="submit" value="등록" class="btn btn-primary">등록</button>
+        <button type="button" value="목록" class="btn btn-secondary" onclick="window.location.href='{{ url_for('main.index') }}'">목록</button>
     </form>
 </div>
 

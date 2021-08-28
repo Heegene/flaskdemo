@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container">
+  <h5 class="my-3 border-bottom pb-2">질문 등록</h5>
+  <form method="post" class="post-form my-3">
+    {{ form.csrf_token }}
+<!--    &lt;!&ndash; subject.label 은 라벨 내용을 표시하고 subject()는 입력 폼을 표시함   &ndash;&gt;-->
+<!--    {{ form.subject.label }}-->
+<!--    {{ form.subject(class="form-control") }}-->
+
+
+<!--    {{ form.content.label }}-->
+<!--    {{ form.content(class="form-control") }}-->
+
+<!--    <button type="submit" class="btn btn-primary">저장</button>-->
+    <!--  에러 로깅-->
+        {% for field, errors in form.errors.items() %}
+        <div class="alert alert-danger" role="alert">
+          <strong> {{ form[field].label }}</strong>: {{ ','.join(errors) }}
+        </div>
+        {% endfor %}
+        <div class="form-group">
+          <label for="subject">제목</label>
+          <input type="text" class="form-control" name="subject" id="subject" value="{{ form.subject.data or '' }}">
+        </div>
+        <div class="form-group">
+          <label for="content">내용</label>
+            <!--   기존에 입력한 값이 있다면 저장 실패시에도 날아가지 않도록 form.content.data 걸어줌. get 일 경우 빈값이므로 ''치환   -->
+          <textarea class="form-control" name="content" id="content" rows="6">{{ form.content.data or '' }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">저장</button>
+  </form>
+
+</div>
+
+{% endblock %}
