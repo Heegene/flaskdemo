@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<!-- url_for는 정적파일 경로도 찾아줌 -->
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--&lt;!&ndash; url_for는 정적파일 경로도 찾아줌 &ndash;&gt;-->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">-->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">-->
 
-<head>
-    <meta charset="UTF-8">
-    <title>질문 상세 페이지 </title>
-</head>
-<body>
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>질문 상세 페이지 </title>-->
+<!--</head>-->
+<!--<body>-->
+
+{% extends 'base.html' %}
+{% block content %}
+
 <div class="container my-3">
     <h2 class="border-bottom py-2"> {{ question.subject }} </h2>
     <div class="card my-3">
@@ -46,7 +50,7 @@
     </form>
 </div>
 
-
+{% endblock %}
 
 <!--<form action="{{ url_for('answer.create', question_id=question.id) }}" method="post">-->
 <!--    <textarea name="content" id="content" rows="20"></textarea>-->
@@ -78,5 +82,5 @@
 <!--{% endif %}-->
 
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

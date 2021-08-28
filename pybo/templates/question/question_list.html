@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
-<head>
-    <meta charset="UTF-8">
-    <title>질문 리스트</title>
-</head>
-<body>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">-->
+
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>질문 리스트</title>-->
+<!--</head>-->
+<!--<body>-->
+
+
+{% extends 'base.html' %}
+{% block content %}
 
 <div class="container my-3">
     <table class="table">
@@ -37,6 +42,7 @@
 </div>
 
 
+{% endblock %}
 
 
 
@@ -51,5 +57,5 @@
 <!--    <p> 질문이 없습니다.</p>-->
 <!--{% endif %}-->
 
-</body>
-</html>
+<!--</body>-->
+<!--</html>-->

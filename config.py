@@ -9,3 +9,6 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///{}'.format(os.path.join(BASE_DIR, 'pybo.db'
 
 # SQL Alchemy 이벤트 처리 옵션
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# CSRF 토큰 생성에 필요한 secret key
+SECRET_KEY = "dev"

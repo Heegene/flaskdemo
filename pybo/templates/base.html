@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!--    web 표준 준수를 위한 공통 베이스 html 파일 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- bootstrap CSS   -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <!-- pybo CSS  -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title> flask demo</title>
+
+</head>
+<body>
+<!-- 템플릿 내 내용. 이후 파일들은 이 block content 이하 내용에 내용을 기재-->
+{% block content %}
+
+{% endblock %}
+<!-- 내용 종료-->
+
+</body>
+</html>
