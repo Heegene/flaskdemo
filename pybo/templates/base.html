@@ -9,9 +9,15 @@
     <!-- pybo CSS  -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title> flask demo</title>
+    <!-- jQuery JS  -->
+    <script src="{{ url_for('static', filename='jquery-3.6.0.min.js') }}"></script>
+    <!-- Bootstrap JS-->
+    <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
 
 </head>
 <body>
+{% include "navbar.html" %}
+
 <!-- 템플릿 내 내용. 이후 파일들은 이 block content 이하 내용에 내용을 기재-->
 {% block content %}
 
